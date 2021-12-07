@@ -19,11 +19,14 @@ public class TVUser {
 		tv1.volumeDown();
 		tv1.powerOff();
 
+		// SamsungTV로만 실습을 위하여 주석 처리함(applicationContext.xml 부분 제거하면 LGTV 부분 사용 가능)
+		/*
 		TV tv2 = (TV)factory.getBean("LgTV");
 		tv2.powerOn();
 		tv2.volumeUp();
 		tv2.volumeDown();
 		tv2.powerOff();
+		*/
 		
 		// 3. Spring 컨테이너 종료
 		factory.close();
