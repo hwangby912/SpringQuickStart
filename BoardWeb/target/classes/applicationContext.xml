@@ -2,19 +2,63 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<!-- Setter Injection을 위한 Element 지정 	
-		<bean id = "SamsungTV" class = "polymorphism.SamsungTV" >
-			<property name="speaker" ref = "sony"></property>
-			<property name="price" value = "2700000"></property>
-		</bean> 
+	<!-- context:component-scan은 bean에 대해서 @Component를 붙여야 함 -->
+	<context:component-scan base-package="polymorphism"></context:component-scan>
+	<bean id = "LgTV" class = "polymorphism.LgTV" >
+		<constructor-arg ref = "Apple"></constructor-arg>
+		<constructor-arg value = "2700000"></constructor-arg>
+	</bean>
+	
+	
+	<!-- Setter Injection을 위한 Element 지정	
+	<bean id = "SamsungTV" class = "polymorphism.SamsungTV" >
+		<property name="speaker" ref = "sony"></property>
+		<property name="price" value = "2700000"></property>
+	</bean> 
 	-->
 	
+	<!-- 
 	<bean id = "SamsungTV" class = "polymorphism.SamsungTV" p:speaker-ref="sony" p:price-ref="2700000"></bean>
 	
 	<bean id = "sony" class = "polymorphism.SonySpeaker"></bean>
 	<bean id = "apple" class = "polymorphism.AppleSpeaker"></bean>
+	<bean id = "LgTV" class = "polymorphism.LgTV" init-method = "initMethod" destroy-method = "destroyMethod" scope = "singleton"/> 
+	-->
 	
-	<!-- <bean id = "LgTV" class = "polymorphism.LgTV" init-method = "initMethod" destroy-method = "destroyMethod" scope = "singleton"/> -->
+	<!-- Collection Type을 위한 bean등록 -->
+	<bean id = "collectionBean" class = "com.springbook.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<list>
+				<value>서울시 강남구 역삼동</value>
+				<value>서울시 성동구 행당동</value>
+			</list>
+		</property>
+		
+		<property name="addressSet">
+			<set value-type = "java.lang.String">
+				<value>서울시 강남구 역삼동</value>
+				<value>서울시 성동구 성수동</value>
+				<value>서울시 성동구 성수동</value>
+			</set>
+		</property>	
+		
+		<property name="addressMap">
+			<map>
+				<entry>
+					<key><value>고길동</value></key>
+					<value>서울시 강남구 역삼동</value>
+				</entry>
+				<entry>
+					<key><value>마이콜</value></key>
+					<value>서울시 강서구 화곡동</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
 </beans>

@@ -1,8 +1,25 @@
 package polymorphism;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class LgTV implements TV {
+	@Autowired
+//	@Qualifier("Apple")
+	private Speaker speaker;
+	private int price;
+	
 	public LgTV() {
-		System.out.println("===> LgTV 객체 생성");
+		System.out.println("===> LGTV 객체(1) 생성");
+	}
+	
+	public LgTV(Speaker speaker, int price) {
+		System.out.println("===> LGTV 객체(2) 생성");
+		this.speaker = speaker;
+		this.price = price;
+		System.out.println(this.getClass() + "의 Speaker는 " + this.speaker.getClass().getName() + "이고 가격은 " + this.price + " 원 입니다.");
 	}
 	
 	public void initMethod() {
@@ -22,10 +39,10 @@ public class LgTV implements TV {
 	}
 	
 	public void volumeUp() {
-		System.out.println("LgTV --- 소리 올린다");
+		speaker.volumeUp();
 	}
 
 	public void volumeDown() {
-		System.out.println("LgTV --- 소리 내린다");
+		speaker.volumeDown();
 	}
 }

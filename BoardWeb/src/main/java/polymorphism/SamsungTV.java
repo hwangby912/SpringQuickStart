@@ -1,6 +1,11 @@
 package polymorphism;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+//@Component("SamsungTV")
 public class SamsungTV implements TV {
+	@Autowired
 	private Speaker speaker;
 	private int price;
 	
@@ -27,6 +32,7 @@ public class SamsungTV implements TV {
 		System.out.println("===> SamsungTV 객체(3) 생성");
 		this.speaker = speaker;
 		this.price = price;
+		System.out.println(this.getClass() + "의 Speaker는 " + this.speaker.getClass().getName() + "이고 가격은 " + this.price + " 원 입니다.");
 	}
 	
 	public void initMethod() {
